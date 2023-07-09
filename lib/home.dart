@@ -22,30 +22,35 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Flutter Http')),
-      body: ListView.builder(
-        itemCount: _posts.length,
-        itemBuilder: (context, index) {
-          return ListTile(
-            leading: Container(
-              color: const Color.fromARGB(255, 0, 0, 0),
-              height: 100,
-              width: 100,
-              child: _posts[index]['urlToImage'] != null
-                  ? Image.network(_posts[index]['urlToImage'])
-                  : const Center(),
-            ),
-            title: Text('${_posts[index]['title']}'),
-            subtitle: Text('${_posts[index]['description']}'),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (c) => Detail(articleData: _posts[index])),
-              );
-            },
-          );
-        },
+      appBar: AppBar(
+          title: const Text('All articles about Tesla from the last month')),
+      body: Scrollbar(
+        // Tambahkan Scrollbar widget
+        child: ListView.builder(
+          itemCount: _posts.length,
+          itemBuilder: (context, index) {
+            return ListTile(
+              leading: Container(
+                color: const Color.fromARGB(255, 0, 0, 0),
+                height: 100,
+                width: 100,
+                child: _posts[index]['urlToImage'] != null
+                    ? Image.network(_posts[index]['urlToImage'])
+                    : const Center(),
+              ),
+              title: Text('${_posts[index]['title']}'),
+              subtitle: Text('${_posts[index]['description']}'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (c) => Detail(articleData: _posts[index]),
+                  ),
+                );
+              },
+            );
+          },
+        ),
       ),
     );
   }
